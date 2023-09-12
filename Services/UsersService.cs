@@ -1,4 +1,4 @@
-using BCrypt;
+using StoreDatabase.Models;
 using UserStoreApi.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -10,16 +10,16 @@ public class UsersService
     private readonly IMongoCollection<User> _usersCollection;
 
     public UsersService(
-        IOptions<UserStoreDatabaseSettings> userStoreDatabaseSettings)
+        IOptions<StoreDatabaseSettings> storeDatabaseSettings)
     {
         var mongoClient = new MongoClient(
-            userStoreDatabaseSettings.Value.ConnectionString);
+            storeDatabaseSettings.Value.ConnectionString);
 
         var mongoDatabase = mongoClient.GetDatabase(
-            userStoreDatabaseSettings.Value.DatabaseName);
+            storeDatabaseSettings.Value.DatabaseName);
 
         _usersCollection = mongoDatabase.GetCollection<User>(
-            userStoreDatabaseSettings.Value.UsersCollectionName);
+            storeDatabaseSettings.Value.UsersCollectionName);
     }
 
     public async Task<List<User>> GetAsync() =>

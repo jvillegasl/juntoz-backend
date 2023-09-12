@@ -1,7 +1,6 @@
 using System.Text;
-using UserStoreApi.Models;
+using StoreDatabase.Models;
 using UserStoreApi.Services;
-using OrderStoreApi.Models;
 using OrderStoreApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -41,15 +40,11 @@ builder.Services.AddAuthorization();
 
 // Add services to the container.
 
-builder.Services.Configure<UserStoreDatabaseSettings>(
-    builder.Configuration.GetSection("UserStoreDatabase")
+builder.Services.Configure<StoreDatabaseSettings>(
+    builder.Configuration.GetSection("StoreDatabase")
 );
 
 builder.Services.AddSingleton<UsersService>();
-
-builder.Services.Configure<OrderStoreDatabaseSettings>(
-    builder.Configuration.GetSection("OrderStoreDatabase")
-);
 
 builder.Services.AddSingleton<OrdersService>();
 

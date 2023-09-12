@@ -1,3 +1,4 @@
+using StoreDatabase.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using OrderStoreApi.Models;
@@ -8,16 +9,16 @@ public class OrdersService
 {
     private readonly IMongoCollection<Order> _ordersCollection;
 
-    public OrdersService(IOptions<OrderStoreDatabaseSettings> orderStoreDatabaseSettings)
+    public OrdersService(IOptions<StoreDatabaseSettings> storeDatabaseSettings)
     {
         var mongoClient = new MongoClient(
-            orderStoreDatabaseSettings.Value.ConnectionString);
+            storeDatabaseSettings.Value.ConnectionString);
 
         var mongoDatabase = mongoClient.GetDatabase(
-            orderStoreDatabaseSettings.Value.DatabaseName);
+            storeDatabaseSettings.Value.DatabaseName);
 
         _ordersCollection = mongoDatabase.GetCollection<Order>(
-            orderStoreDatabaseSettings.Value.OrdersCollectionName
+            storeDatabaseSettings.Value.OrdersCollectionName
         );
     }
 
