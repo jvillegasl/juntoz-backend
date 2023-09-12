@@ -3,6 +3,8 @@ using BookStoreApi.Models;
 using BookStoreApi.Services;
 using JWTauth.WebApi.Models;
 using UserStoreApi.Services;
+using OrderStoreApi.Models;
+using OrderStoreApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -51,6 +53,12 @@ builder.Services.Configure<UserStoreDatabaseSettings>(
 );
 
 builder.Services.AddSingleton<UsersService>();
+
+builder.Services.Configure<OrderStoreDatabaseSettings>(
+    builder.Configuration.GetSection("OrderStoreDatabase")
+);
+
+builder.Services.AddSingleton<OrdersService>();
 
 builder.Services.AddControllers()
     .AddJsonOptions(
