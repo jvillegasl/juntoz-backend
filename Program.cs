@@ -1,5 +1,5 @@
 using System.Text;
-using JWTauth.WebApi.Models;
+using UserStoreApi.Models;
 using UserStoreApi.Services;
 using OrderStoreApi.Models;
 using OrderStoreApi.Services;

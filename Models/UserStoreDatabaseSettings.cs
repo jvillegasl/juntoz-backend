@@ -1,4 +1,4 @@
-namespace JWTauth.WebApi.Models
+namespace UserStoreApi.Models
 {
     public class UserStoreDatabaseSettings
     {

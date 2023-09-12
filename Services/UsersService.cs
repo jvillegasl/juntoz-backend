@@ -1,6 +1,5 @@
 using BCrypt;
-using JWTauth.WebApi.Models;
-using JWTAuth.WebApi.Models;
+using UserStoreApi.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
