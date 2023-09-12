@@ -18,6 +18,19 @@ public class OrdersController : ControllerBase
     [HttpGet]
     public async Task<List<Order>> Get() => await _ordersService.GetAsync();
 
+    [HttpGet("{id:length(24)}")]
+    public async Task<ActionResult<Order>> Get(string id)
+    {
+        var order = await _ordersService.GetAsync(id);
+
+        if (order is null)
+        {
+            return NotFound();
+        }
+
+        return order;
+    }
+
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] NewOrder newOrder)
     {
