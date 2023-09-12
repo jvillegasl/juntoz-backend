@@ -1,6 +1,4 @@
 using System.Text;
-using BookStoreApi.Models;
-using BookStoreApi.Services;
 using JWTauth.WebApi.Models;
 using UserStoreApi.Services;
 using OrderStoreApi.Models;
@@ -42,11 +40,6 @@ builder.Services.AddAuthentication(x =>
 builder.Services.AddAuthorization();
 
 // Add services to the container.
-builder.Services.Configure<BookStoreDatabaseSettings>(
-    builder.Configuration.GetSection("BookStoreDatabase")
-);
-
-builder.Services.AddSingleton<BooksService>();
 
 builder.Services.Configure<UserStoreDatabaseSettings>(
     builder.Configuration.GetSection("UserStoreDatabase")
