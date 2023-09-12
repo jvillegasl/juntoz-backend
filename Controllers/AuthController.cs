@@ -30,9 +30,15 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> RegisterAsync([FromBody] RegisterUser request)
     {
-        await _usersService.CreateAsync(request);
+        bool result = await _usersService.CreateAsync(request);
+
+        if (!result)
+        {
+            return StatusCode(StatusCodes.Status409Conflict, new { message = "User already exists" });
+        }
 
         return Ok(request);
+
     }
 
     [AllowAnonymous]
