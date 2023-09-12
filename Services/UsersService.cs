@@ -29,12 +29,12 @@ public class UsersService
     public async Task<User?> GetAsync(string id) =>
         await _usersCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-    public async Task CreateAsync(RegisterUser request)
+    public async Task<bool> CreateAsync(RegisterUser request)
     {
         var count = await _usersCollection.Find(x => x.Username == request.Username).CountDocumentsAsync();
         if (count > 0)
         {
-            throw new ApplicationException("Username '" + request.Username + "' is already taken");
+            return false;
         }
 
         User newUser = new()
@@ -43,8 +43,9 @@ public class UsersService
             Email = request.Email,
             Password = BCrypt.Net.BCrypt.HashPassword(request.Password)
         };
-
         await _usersCollection.InsertOneAsync(newUser);
+
+        return true;
     }
 
     public async Task<User?> FindByUsernameAsync(string? username) =>
