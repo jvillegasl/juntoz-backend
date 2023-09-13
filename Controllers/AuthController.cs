@@ -36,7 +36,7 @@ public class AuthController : ControllerBase
             return StatusCode(StatusCodes.Status409Conflict, new { message = "User already exists" });
         }
 
-        return Ok(request);
+        return Ok();
 
     }
 
@@ -53,7 +53,11 @@ public class AuthController : ControllerBase
 
         string token = GenerateToken(user);
 
-        return Ok(token);
+        return Ok(new
+        {
+            token,
+            expiresIn = TokenLifeTime.TotalMinutes
+        });
     }
 
     private string GenerateToken(User user)
