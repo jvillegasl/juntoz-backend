@@ -1,4 +1,4 @@
-# Juntoz - Prueba Ténica Full Stack - Backend
+# Juntoz - Full Stack Test - Backend
 
 Backend Server implemented in .NET 6.0 C#.
 
